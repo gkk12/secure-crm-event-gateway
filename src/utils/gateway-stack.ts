@@ -23,7 +23,7 @@ export class GatewayStack extends Stack {
     const createLeadFn = new NodejsFunction(this, 'CreateLeadFunction', {
       functionName: 'crm-create-lead',
       runtime: Runtime.NODEJS_22_X,
-      entry: path.join(__dirname, '../src/handlers/createLead.ts'),
+      entry: path.join(process.cwd(), 'src/handlers/createLead.ts'),
       handler: 'handler',
       memorySize: 128,
       timeout: Duration.seconds(10),
