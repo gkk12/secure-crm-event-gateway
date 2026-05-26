@@ -71,6 +71,6 @@ export const handler = async (
     return response(500, { message: 'Internal error while storing lead.' });
   }
 
-  logger.info('Lead stored successfully', { requestId, leadId });
+  logger.info('Lead stored successfully - updated the handler', { requestId, leadId });
   return response(201, { message: 'Lead created.', leadId });
 };
