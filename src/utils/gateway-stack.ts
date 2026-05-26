@@ -15,8 +15,8 @@ export class GatewayStack extends Stack {
     const leadsTable = new Table(this, 'LeadsTable', {
       tableName: 'Leads',
       partitionKey: { name: 'leadId', type: AttributeType.STRING },
-      billingMode: BillingMode.PAY_PER_REQUEST, // no provisioned-capacity cost
-      removalPolicy: RemovalPolicy.DESTROY,     // clean teardown for a demo
+      billingMode: BillingMode.PAY_PER_REQUEST,
+      removalPolicy: RemovalPolicy.DESTROY,
     });
 
     // --- Lambda: createLead handler ------------------------------------
@@ -38,7 +38,7 @@ export class GatewayStack extends Stack {
     // Least-privilege IAM: function may ONLY write to the Leads table
     leadsTable.grantWriteData(createLeadFn);
 
-    // --- API Gateway: HTTP entrypoint (the "Kong" layer) ---------------
+    // --- API Gateway: HTTP entrypoint ---------------
     const api = new LambdaRestApi(this, 'CrmGatewayApi', {
       restApiName: 'crm-event-gateway',
       handler: createLeadFn,
@@ -47,7 +47,7 @@ export class GatewayStack extends Stack {
     });
 
     const leads = api.root.addResource('leads');
-    leads.addMethod('POST'); // POST /leads -> createLeadFn
+    leads.addMethod('POST');
 
     new CfnOutput(this, 'ApiInvokeUrl', {
       value: api.url,

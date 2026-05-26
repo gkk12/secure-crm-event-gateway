@@ -1,5 +1,5 @@
 import { App } from 'aws-cdk-lib';
-import { GatewayStack } from '../src/utils/gateway-stack'
+import { GatewayStack } from '../src/utils/gateway-stack';
 
 const app = new App();
 new GatewayStack(app, 'SecureCrmEventGatewayStack', {

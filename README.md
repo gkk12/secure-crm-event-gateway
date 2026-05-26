@@ -7,4 +7,5 @@ Incoming POST -> API Gateway -> AWS Lambda (Node.js/TS) -> DynamoDB
 Structured JSON logs are emitted for Datadog-style ingestion.
 
 ## Stack
+
 AWS CDK (TypeScript) · Lambda · DynamoDB · API Gateway · Jest · ESLint · Prettier · GitHub Actions

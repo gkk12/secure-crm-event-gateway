@@ -8,7 +8,10 @@ import { validateLead } from '../utils/validation';
 const TABLE_NAME = process.env.TABLE_NAME ?? '';
 const docClient = DynamoDBDocumentClient.from(new DynamoDBClient({}));
 
-function response(statusCode: number, body: Record<string, unknown>): APIGatewayProxyResult {
+function response(
+  statusCode: number,
+  body: Record<string, unknown>,
+): APIGatewayProxyResult {
   return {
     statusCode,
     headers: { 'Content-Type': 'application/json' },
@@ -56,7 +59,7 @@ export const handler = async (
       new PutCommand({
         TableName: TABLE_NAME,
         Item: item,
-        ConditionExpression: 'attribute_not_exists(leadId)', 
+        ConditionExpression: 'attribute_not_exists(leadId)',
       }),
     );
   } catch (err) {
