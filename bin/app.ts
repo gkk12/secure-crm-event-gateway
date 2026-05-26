@@ -11,7 +11,10 @@ new GatewayStack(app, 'SecureCrmEventGatewayStack', {
 });
 
 new CicdStack(app, 'CrmCicdStack', {
-  env: { account: process.env.CDK_DEFAULT_ACCOUNT, region: process.env.CDK_DEFAULT_REGION },
+  env: {
+    account: process.env.CDK_DEFAULT_ACCOUNT,
+    region: process.env.CDK_DEFAULT_REGION,
+  },
   githubOwner: 'gkk12',
   githubRepo: 'secure-crm-event-gateway',
 });
