@@ -20,7 +20,9 @@ describe('createLead handler', () => {
 
   it('returns 201 and stores the lead for a valid payload', async () => {
     ddbMock.on(PutCommand).resolves({});
-    const res = await handler(buildEvent({ customerName: 'John Doe', email: 'john@vw.com' }));
+    const res = await handler(
+      buildEvent({ customerName: 'John Doe', email: 'john@vw.com' }),
+    );
     expect(res.statusCode).toBe(201);
     expect(ddbMock).toHaveReceivedCommandTimes(PutCommand, 1);
     expect(JSON.parse(res.body).leadId).toBeDefined();
@@ -39,7 +41,9 @@ describe('createLead handler', () => {
 
   it('returns 500 when DynamoDB fails', async () => {
     ddbMock.on(PutCommand).rejects(new Error('DynamoDB unavailable'));
-    const res = await handler(buildEvent({ customerName: 'John Doe', email: 'john@vw.com' }));
+    const res = await handler(
+      buildEvent({ customerName: 'John Doe', email: 'john@vw.com' }),
+    );
     expect(res.statusCode).toBe(500);
   });
 });
