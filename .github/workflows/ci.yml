@@ -36,13 +36,13 @@ jobs:
 
       - name: Synthesize CDK stack
         run: npm run synth
-deploy:
+  deploy:
     name: Deploy to AWS
     needs: quality
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
-      id-token: write  
+      id-token: write
       contents: read
     steps:
       - uses: actions/checkout@v4
